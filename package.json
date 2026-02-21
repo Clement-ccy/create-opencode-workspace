@@ -1,0 +1,28 @@
+{
+  "name": "create-opencode-workspace",
+  "version": "1.0.0",
+  "description": "CLI tool to scaffold pre-configured OpenCode workspaces natively (like Content Creator).",
+  "type": "module",
+  "bin": {
+    "create-opencode-workspace": "./bin/cli.js"
+  },
+  "scripts": {
+    "start": "node ./bin/cli.js"
+  },
+  "author": "Clement Chen",
+  "license": "MIT",
+  "dependencies": {
+    "fs-extra": "^11.2.0",
+    "picocolors": "^1.0.0",
+    "prompts": "^2.4.2"
+  },
+  "keywords": [
+    "opencode",
+    "cli",
+    "scaffold",
+    "workspace",
+    "content-creator",
+    "ai",
+    "agents"
+  ]
+}
