@@ -16,57 +16,46 @@ metadata:
 
 ## 平台路由
 
-### 中文平台
+### 社交媒体平台 (Social Media)
 
 | 平台 | 技能名称 | 核心特征 |
 |------|------|---------|
-| 微信公众号 | `platform-social-wechat` | 深度阅读、私域流量 |
-| 小红书 | `platform-social-xiaohongshu` | 种草社区、图文并茂 |
-| 微博 | `platform-social-weibo` | 公共舆论、话题传播 |
+| Twitter, 微博, 小红书 | `platform-social` | 短图文、话题传播、实时信息 |
 
-### 国际平台
+### 视频平台 (Video Platforms)
 
 | 平台 | 技能名称 | 核心特征 |
 |------|------|---------|
-| LinkedIn | `platform-social-linkedin` | 职场社交、专业内容 |
-| Twitter/X | `platform-social-twitter` | 实时信息、推文串 |
+| Bilibili, TikTok, YouTube | `platform-video` | 视频脚本、视听结合、完播率导向 |
+
+### 长文与专业平台 (Long-form & Professional)
+
+| 平台 | 技能名称 | 核心特征 |
+|------|------|---------|
+| 微信公众号, LinkedIn | 直接复用原文 (`voice-blog`) | 深度阅读、专业内容、私域流量 |
 
 ---
 
 ## 平台特性速查
 
-### 内容长度
+### 内容长度 & 发布时间
 
-| 平台 | 建议长度 |
-|------|---------|
-| 微信公众号 | 800-3000 字 |
-| 小红书 | 300-800 字 |
-| 微博 | 140-300 字 |
-| LinkedIn | 1300-2000 字符 |
-| Twitter/X | 100-250 字符（单条） |
-
-### 发布时间
-
-| 平台 | 最佳时间 |
-|------|---------|
-| 微信公众号 | 早 8 点 / 晚 8 点 |
-| 小红书 | 晚 7-10 点 |
-| 微博 | 午间 / 晚间高峰 |
-| LinkedIn | 工作日上午 |
-| Twitter/X | 9-10 点 / 晚 7-9 点 |
+| 平台组 | 建议长度 | 最佳发布时间 |
+|------|---------|-------------|
+| 社交媒体 (Twitter/微博/小红书) | 100-500 字 (或单推文/推文串) | 流量高峰 (午间/晚间 7-10 点) |
+| 视频平台 (B站/TikTok/YouTube) | 视口播语速而定 (通常 3-10 分钟脚本) | 晚间或周末全天 |
+| 长文平台 (微信公众号/LinkedIn) | 800-3000 字 (直接复用博客原文) | 工作日上午 (LinkedIn) / 早晚 8 点 (微信) |
 
 ---
 
 ## 路由决策
 
-```
-你要发布到哪个平台？
+```text
+你要发布到哪个平台组？
 │
-├── 微信公众号 → platform-social-wechat
-├── 小红书 → platform-social-xiaohongshu
-├── 微博 → platform-social-weibo
-├── LinkedIn → platform-social-linkedin
-└── Twitter/X → platform-social-twitter
+├── 社交媒体 (Twitter/微博/小红书) → platform-social
+├── 视频平台 (Bilibili/TikTok/YouTube) → platform-video
+└── 长文/专业平台 (微信公众号/LinkedIn) → 直接复用 voice-blog 核心文章
 ```
 
 ---

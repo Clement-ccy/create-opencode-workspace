@@ -14,7 +14,7 @@ metadata:
 
 ```
 博客类型路由
-├── 技术类 → domain-tech
+├── 技术类 → domain-technical
 ├── 艺术/摄影/音乐/电影 → domain-artistic
 ├── 设计 → domain-design
 ├── 文学/读书/写作 → domain-literary
@@ -192,10 +192,7 @@ metadata:
 
 ### 图片描述预留规范
 
-写作过程中，可能还没有准备好图片，此时可以**先写图片描述**，后续再替换为实际图片。
-
-#### 描述格式
-
+---
 ```markdown
 <!-- IMAGE:
 标题：[图片标题]
@@ -219,136 +216,26 @@ metadata:
 尺寸建议：宽屏 16:9
 -->
 
-![登录流程图](./images/login-flow.png)
+![登录流程图](../media/notion/blocks/login-flow.png)
 ```
 
-#### 描述示例（无实际图片时）
+#### 封面示例
 
 ```markdown
 <!-- IMAGE:
-标题：咖啡冲泡过程
-类型：示意图
-内容：六个步骤：磨豆、闷蒸、第一次注水、第二次注水、完成、倒出
-用途：配合教程步骤，让读者更直观理解
+标题：拒绝 AI 焦虑：构建你的闭环学习系统，让 AI 成为真正的外挂大脑
+类型：封面图
+内容：背景使用渐变色，叠加半透明文章关键字（四个字左右）“生成式AI”，在中间加一个ICON/LOGO
+用途：帮助读者快速了解文章内容
+尺寸建议：宽屏 1200:630
 -->
 
-[图片：咖啡冲泡六步示意图]
+![拒绝 AI 焦虑：构建你的闭环学习系统，让 AI 成为真正的外挂大脑-封面图](../media/notion/pages/ai-closed-loop-learning.png)
 ```
 
-### Mermaid 图表规范
-
-#### 何时使用 Mermaid
-
-- 需要展示流程、架构、关系
-- 图片后续可能需要修改
-- 希望保持版本控制
-- 不需要复杂的视觉效果
-
-#### 常用图表类型
-
-**流程图 (Flowchart)**
-
-```mermaid
-flowchart TD
-    A[开始] --> B{是否登录?}
-    B -->|是| C[进入主页]
-    B -->|否| D[跳转登录]
-    D --> E[输入账号密码]
-    E --> F{验证通过?}
-    F -->|是| C
-    F -->|否| D
-```
-
-**时序图 (Sequence Diagram)**
-
-```mermaid
-sequenceDiagram
-    participant U as 用户
-    participant S as 服务器
-    participant D as 数据库
-    
-    U->>S: 发起登录请求
-    S->>D: 查询用户信息
-    D-->>S: 返回用户数据
-    S->>S: 验证密码
-    S-->>U: 返回登录结果
-```
-
-**架构图**
-
-```mermaid
-graph TB
-    subgraph 前端
-        A[React App]
-        B[Redux Store]
-    end
-    
-    subgraph 后端
-        C[API Server]
-        D[Auth Service]
-    end
-    
-    subgraph 数据层
-        E[(PostgreSQL)]
-        F[(Redis)]
-    end
-    
-    A --> B
-    A --> C
-    C --> D
-    C --> E
-    D --> F
-```
-
-**状态图 (State Diagram)**
-
-```mermaid
-stateDiagram-v2
-    [*] --> 草稿
-    草稿 --> 审核中: 提交
-    审核中 --> 已发布: 通过
-    审核中 --> 草稿: 驳回
-    已发布 --> [*]
-```
-
-#### Mermaid 写作规范
-
-| 要点 | 说明 |
-|------|------|
-| 命名清晰 | 节点和箭头标签要能说明意思 |
-| 不要过于复杂 | 超过 10 个节点考虑拆分 |
-| 添加图例说明 | 在图下方简要说明 |
-| 方向选择 | TD/TB（上下）、LR（左右）根据内容选择 |
-
-#### Mermaid 与实际图片的选择
-
-| 情况 | 选择 |
-|------|------|
-| 简单流程、架构 | Mermaid |
-| 需要品牌元素 | 实际图片 |
-| 复杂可视化 | 实际图片 |
-| 需要版本控制 | Mermaid |
-| 需要动画效果 | 实际图片 |
-
-### 图片使用规范
-
-#### 文件命名
-
-```
-[类型]-[内容]-[序号].[格式]
-
-示例：
-- screenshot-login-page-01.png
-- diagram-data-flow.png
-- photo-coffee-latte-01.jpg
-```
-
-#### Alt 文本
-
-每张图片都应该有 alt 文本：
-
-```markdown
-![登录界面截图：展示账号密码输入框和登录按钮](./images/login.png)
+#### 描述示例（无实际图片时）
+以下检查适用于所有类型：
+![登录界面截图：展示账号密码输入框和登录按钮](../media/notion/blocks/login.png)
 ```
 
 #### 图片位置
@@ -358,12 +245,7 @@ stateDiagram-v2
 - 艺术博客：作品图在描述前或后
 
 ---
-
-## 发布前检查清单
-
-以下检查适用于所有类型：
-
-**内容检查**
+- [ ] 有没有明显的套话/填充词？
 - [ ] 这是我想说的话吗？（而不是「应该说的话」）
 - [ ] 有没有为了显得专业/有深度而加的内容？
 - [ ] 开头能不能让读者想继续读？
@@ -396,4 +278,4 @@ stateDiagram-v2
 
 ### 分发路由
 
-博客完成后，如需分发到社交媒体平台，请使用对应的 `voice-` 平台技能（如 `voice-xiaohongshu`、`voice-wechat` 等），并叠加 `voice-social` 技能进行改写。
+博客完成后，如需分发到社交媒体平台，请使用对应的 `platform-` 平台技能（如 `platform-social`、`platform-video`、`platform-audio-podcast` 等），并叠加 `voice-social` 技能进行改写。

@@ -22,8 +22,9 @@ metadata:
 
 1. **策划：** 使用 `/brainstorm <主题>` 调研主题。
 2. **起草：** 使用 `/draft` 基于大纲撰写核心博客 (Core Blog)。
-3. **校验：** **强制**使用 `/audit <文件>` 调用本地 `scripts/` 进行语调与 SEO 校验。
-4. **分发：** 使用 `/repurpose <文件>` 将核心博客裂变为多平台文案。
+3. **补图：** 使用 `/enrich` 丰富博客的插图与可视化图表（可选）。
+4. **校验：** **强制**使用 `/audit <文件>` 调用本地 `scripts/` 进行语调与 SEO 校验。
+5. **分发：** 使用 `/repurpose <文件>` 将核心博客裂变为多平台文案。
 
 ## 代理调度规则
 
@@ -44,7 +45,7 @@ metadata:
 
 ### 2. 领域上下文 (Domain Contexts)
 *用于决定文章的深度、专业性或感性维度*
-- `domain-tech`: 技术（事实驱动、代码、架构）
+- `domain-technical`: 技术（事实驱动、代码、架构）
 - `domain-artistic`: 艺术（摄影、音乐等，偏向感性、非 marketing）
 - `domain-design`: 设计（UI/UX、美学讨论）
 - `domain-literary`: 文学（散文、评论）
@@ -52,6 +53,7 @@ metadata:
 
 ### 3. 分发平台格式 (Platform Formats)
 *用于决定最终输出的排版和特征*
-- 社交媒体：`platform-social-xiaohongshu`, `platform-social-twitter`, `platform-social-wechat`, `platform-social-weibo`, `platform-social-linkedin`
-- 音视频：`platform-video-bilibili`, `platform-video-youtube`, `platform-video-tiktok`, `platform-audio-podcast`
+- 社交媒体：`platform-social` (统一处理小红书、推特、微博等), `platform-social-wechat` / `platform-social-linkedin` (可直接复用原文或微调)
+- 音视频：`platform-video` (统一处理 B站、YouTube、TikTok 等), `platform-audio-podcast`
+- 图片技能：`skill-image-enrichment` (博客插图与 Mermaid 占位符)
 - 辅助技能：`skill-seo` (中文/英文双语 SEO 优化指南)
