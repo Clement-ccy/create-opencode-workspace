@@ -47,7 +47,9 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           
           TAG_NAME=${GITHUB_REF#refs/tags/}
-          RELEASE_NOTES=$(git changelog -t $TAG_NAME)
+
+          # Generate release notes from commit messages
+          RELEASE_NOTES=$(git log --pretty=format:"- %s (%h)" $(git describe --tags --abbrev=0 ^HEAD)..HEAD)
           
           gh release create $TAG_NAME \
             --title "$TAG_NAME" \
