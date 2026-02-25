@@ -1,6 +1,6 @@
 {
   "name": "create-opencode-workspace",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "CLI tool to scaffold pre-configured OpenCode workspaces natively (like Content Creator).",
   "type": "module",
   "bin": {
