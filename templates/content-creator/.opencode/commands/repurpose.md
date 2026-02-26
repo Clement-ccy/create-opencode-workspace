@@ -8,13 +8,14 @@
    - Identify the source content (the long-form draft).
    - Identify target platforms (e.g., social, video, audio). If the target is WeChat/LinkedIn, consider using the direct blog text.
    - Identify the language (English/Chinese).
+   - Identify the original article's routing name `[name]` and `[Category]`.
 2. **Select Skills**:
-   - Always load: `voice-social` (for social platforms).
+   - Always load: `voice-social` (for social platforms), `skill-frontmatter-notion` (for Notion-compatible YAML).
    - Load Consolidated Platform Skills: e.g., `platform-social` (for Xiaohongshu/Twitter/Weibo/WeChat), `platform-video` (for Bilibili/YouTube/TikTok), or `platform-audio-podcast`.
 3. **Execute Task (Parallelized)**:
    - For each target platform requested, spin up an independent `quick` category task **in parallel**.
-   - Example Prompt to Agent A: "Convert this text into a {Platform A} post in {Language}. Follow the `{platform-X}` skill guidelines."
-   - Example Prompt to Agent B: "Convert this text into a {Platform B} post in {Language}. Follow the `{platform-Y}` skill guidelines."
+   - Example Prompt to Agent A: "Convert this text into a {Platform A} post in {Language}. Follow the `{platform-X}` skill guidelines. Output MUST be saved to `Assets/[Category]/[name]/distributions/{Platform A}/{name}_{Platform A}.md` with proper Notion frontmatter."
+   - Example Prompt to Agent B: "Convert this text into a {Platform B} post in {Language}. Follow the `{platform-Y}` skill guidelines. Output MUST be saved to `Assets/[Category]/[name]/distributions/{Platform B}/{name}_{Platform B}.md` with proper Notion frontmatter."
 4. **Finalize**: 
    - Wait for all parallel tasks to finish.
    - Output the formatted posts/scripts sequentially for the user to review.

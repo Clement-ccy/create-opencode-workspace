@@ -3,10 +3,10 @@ name: content-creator
 description: 内容创作系统，以博客为核心，支持技术、艺术、设计、文学、个人随笔等多种类型。使用深度路由系统自动匹配写作规范，支持跨平台分发。Use when creating blog posts, personal essays, technical articles, artistic content, or when user mentions writing, content creation, 博客, 写作.
 license: MIT
 metadata:
-  version: 5.0.0
+  version: 5.1.0
   author: Clement Chen
   category: writing
-  updated: 2026-02-21
+  updated: 2026-02-27
   python-tools: brand_voice_analyzer.py, seo_optimizer.py
   languages: English, 中文
   framework: OpenCode Native Task Architecture

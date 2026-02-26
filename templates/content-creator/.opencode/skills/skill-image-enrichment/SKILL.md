@@ -48,7 +48,7 @@ metadata:
 尺寸建议：宽屏 1200:630
 -->
 
-![拒绝 AI 焦虑-封面图](./media/notion/pages/ai-closed-loop-learning.png)
+![拒绝 AI 焦虑-封面图](./ai-closed-loop-learning.png)
 ```
 
 ## 3. Mermaid 图表规范
@@ -86,7 +86,7 @@ flowchart TD
 ### 4.2 Alt 文本
 每张插入的图片都必须有 alt 文本：
 ```markdown
-![登录界面截图：展示账号密码输入框和登录按钮](./media/notion/blocks/login.png)
+![登录界面截图：展示账号密码输入框和登录按钮](./ai-login-page.png)
 ```
 
 ### 4.3 图片位置

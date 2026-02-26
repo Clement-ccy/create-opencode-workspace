@@ -57,4 +57,8 @@ The orchestrator (Sisyphus) should execute these via OpenCode commands (located 
 1. **Never use marketing speak.** If the user asks for a blog on photography, load `domain-artistic`, and ensure the output is emotional, reflective, and factually sparse. 
 2. **Parallelize Distribution.** If asked to repurpose for Twitter and Xiaohongshu, run two parallel tasks. Do not wait for one to finish before starting the other.
 3. **Always check Language.** This workspace supports English and Chinese. Pass the explicit language requirement to the subagents if specified.
-4. **File Output Location.** All outputs (drafts, enriched content, scripts, social posts) MUST be saved directly to the workspace output directory (or relevant markdown files) `contents/*/` for the user to review.
+4. **File Output Location**. All content MUST be saved within the `Assets` directory mimicking the Notion database structure. 
+   - **Base Category**: Content is placed in `Assets/[Category]/[name]/` where `[Category]` is the content type (e.g., `Blogs`, `Newsletters`) and `[name]` is the unique routing name of the article.
+   - **Primary Markdown**: The core article is saved as `Assets/[Category]/[name]/[name].md`.
+   - **Media Files**: Images, audio, and attachments referenced in the article must be saved alongside it in `Assets/[Category]/[name]/`.
+   - **Distributions**: Social media and repurposed versions go into `Assets/[Category]/[name]/distributions/[platform]/`.
