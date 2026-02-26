@@ -204,7 +204,7 @@ Bad: "image1.jpg" or "marketing" or keyword stuffing
 
 ## 6. SEO Scoring System
 
-Using `scripts/seo_optimizer.py`:
+Using `.opencode/skills/skill-seo/scripts/seo_optimizer.py`:
 
 ### Score Calculation
 
@@ -285,7 +285,7 @@ Using `scripts/seo_optimizer.py`:
 
 ```bash
 # Run SEO analysis
-python scripts/seo_optimizer.py article.md "primary keyword" "secondary,keywords"
+python .opencode/skills/skill-seo/scripts/seo_optimizer.py article.md "primary keyword" "secondary,keywords"
 
 # Check recommendations and apply fixes
 ```
@@ -327,7 +327,7 @@ python scripts/seo_optimizer.py article.md "primary keyword" "secondary,keywords
 |------|---------|------|
 | Google Search Console | Performance monitoring | Free |
 | Google Analytics | Traffic analysis | Free |
-| scripts/seo_optimizer.py | Content optimization | Free |
+| .opencode/skills/skill-seo/scripts/seo_optimizer.py | Content optimization | Free |
 | Ahrefs | Comprehensive SEO | Paid |
 | SEMrush | Competitive analysis | Paid |
 
@@ -344,10 +344,10 @@ python scripts/seo_optimizer.py article.md "primary keyword" "secondary,keywords
 
 ```bash
 # Analyze content SEO
-python scripts/seo_optimizer.py article.md "primary keyword"
+python .opencode/skills/skill-seo/scripts/seo_optimizer.py article.md "primary keyword"
 
 # Analyze with secondary keywords
-python scripts/seo_optimizer.py article.md "main keyword" "secondary,keywords,list"
+python .opencode/skills/skill-seo/scripts/seo_optimizer.py article.md "main keyword" "secondary,keywords,list"
 
 # Check keyword density only
 grep -io "keyword" article.md | wc -l

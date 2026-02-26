@@ -9,8 +9,8 @@
    - Identify the audit type (`seo` or `brand`).
    - Identify the language (the scripts now auto-detect Chinese or English).
 2. **Execute Task**:
-   - `audit-seo`: Run `python scripts/seo_optimizer.py <file-path>`
-   - `audit-brand`: Run `python scripts/brand_voice_analyzer.py <file-path>`
+   - `audit-seo`: Run `python .opencode/skills/skill-seo/scripts/seo_optimizer.py <file-path>`
+   - `audit-brand`: Run `python .opencode/skills/voice-blog/scripts/brand_voice_analyzer.py <file-path>`
    - **Important**: These commands should be executed directly via the `bash` tool by the Orchestrator, not delegated to a subagent unless complex reasoning is required on the output.
 3. **Analyze Output**: 
    - Parse the JSON/CLI output returned by the python script.

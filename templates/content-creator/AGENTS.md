@@ -50,7 +50,7 @@ The orchestrator (Sisyphus) should execute these via OpenCode commands (located 
    - **Action**: Spin up parallel `quick` tasks loading the consolidated `platform-social` or `platform-video` skills. For LinkedIn/WeChat, directly reuse the blog content if applicable.
 4. **`/audit`**: 
    - **Trigger**: User asks to check SEO or Brand Voice.
-   - **Action**: Run `python scripts/seo_optimizer.py <file>` or `python scripts/brand_voice_analyzer.py <file>`. Parse the JSON/CLI output and provide a summary.
+   - **Action**: Run `python .opencode/skills/skill-seo/scripts/seo_optimizer.py <file>` or `python .opencode/skills/voice-blog/scripts/brand_voice_analyzer.py <file>`. Parse the JSON/CLI output and provide a summary.
 
 ## Core Rules for Sisyphus
 
