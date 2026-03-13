@@ -17,7 +17,8 @@ async function init() {
       name: 'template',
       message: 'Which OpenCode workspace template would you like to use?',
       choices: [
-        { title: 'Content Creator (Blog, Social Media, Audits)', value: 'content-creator' }
+        { title: 'Content Creator (Blog, Social Media, Audits)', value: 'content-creator' },
+        { title: 'Academic Researcher (Research Lifecycle, Experiments, Paper Writing)', value: 'academic-researcher' }
         // Add more templates here in the future
       ],
     },

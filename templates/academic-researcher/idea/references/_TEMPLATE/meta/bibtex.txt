@@ -1,0 +1,9 @@
+@article{author_year_keyword,
+  title = {},
+  author = {},
+  journal = {},
+  year = {},
+  volume = {},
+  pages = {},
+  doi = {}
+}

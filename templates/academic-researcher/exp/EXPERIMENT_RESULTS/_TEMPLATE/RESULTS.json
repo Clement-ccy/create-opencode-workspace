@@ -1,0 +1,12 @@
+{
+  "experiment_name": "",
+  "timestamp": "",
+  "config": {
+    "model": "",
+    "dataset": "",
+    "hyperparameters": {},
+    "seed": null
+  },
+  "metrics": {},
+  "notes": ""
+}

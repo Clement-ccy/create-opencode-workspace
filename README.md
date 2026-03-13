@@ -2,7 +2,7 @@
 
 A CLI tool to quickly scaffold pre-configured [OhMyOpenCode](https://github.com/ohmyopencode/opencode) workspaces.
 
-Currently, it provides a highly optimized **Content Creator Workspace** which natively leverages OpenCode's `Task(Category + Skills)` architecture for high-efficiency, multi-platform, bilingual content creation.
+It provides pre-configured workspace templates including a **Content Creator** for multi-platform bilingual content and an **Academic Researcher** for end-to-end research lifecycle management, all natively leveraging OpenCode's `Task(Category + Skills)` architecture.
 
 ## Usage
 
@@ -13,7 +13,7 @@ npx create-opencode-workspace
 ```
 
 Follow the prompts:
-1. Select the workspace template (e.g., `content-creator`).
+1. Select the workspace template (e.g., `content-creator`, `academic-researcher`).
 2. Enter your project name.
 
 Once completed, navigate into your new project and start OpenCode!
@@ -31,6 +31,17 @@ A content generation matrix built entirely on OpenCode's native skills architect
 - **/draft**: Starts a long-form draft with proper domain voice routing.
 - **/repurpose**: Concurrently converts the core blog into multiple social media formats.
 - **/audit**: Runs local Python scripts for semantic SEO and tone checks.
+
+### 2. Academic Researcher
+A full-lifecycle academic research workspace built on OpenCode's native skills architecture. It covers idea generation, literature review, experiment planning, experiment execution, data analysis, and paper writing (Markdown + LaTeX). Includes automated novelty checking and citation validation via Python scripts.
+
+- **/ideate**: Explores a research topic, collects literature, and generates research ideas.
+- **/review**: Runs automated novelty and citation validation scripts (mandatory gate).
+- **/plan**: Creates a structured experiment plan (models, datasets, metrics).
+- **/experiment**: Generates and executes experiment scripts.
+- **/analyze**: Analyzes results, producing REPORT.md + RESULTS.json per experiment.
+- **/write**: Drafts paper sections with academic voice routing.
+- **/cite**: Manages references and BibTeX entries.
 
 ## Development
 

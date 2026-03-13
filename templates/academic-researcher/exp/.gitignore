@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Experiment outputs (large files)
+runs/*/checkpoints/
+runs/*/logs/
+*.pt
+*.pth
+*.h5
+*.ckpt
+
+# Data files
+*.csv
+*.parquet
+data/raw/
+
+# IDE
+.idea/
+.vscode/

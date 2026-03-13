@@ -1,0 +1,11 @@
+[
+  {
+    "category": "Environment Configuration",
+    "title": "Dependencies Installation and Project Structure Initialization",
+    "description": "Set up the development environment and install all required dependencies.",
+    "steps": {
+      "step1": "**Base Environment Setup**: Set up Python virtual environment and configure CUDA/GPU if needed.",
+      "step2": "**Install Dependencies**: Install required packages from requirements.txt."
+    }
+  }
+]
