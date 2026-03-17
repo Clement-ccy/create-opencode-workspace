@@ -22,7 +22,7 @@ jobs:
       
       - run: npm ci
       
-      - run: npm publish --access public
+      - run: npm publish --access public --provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
@@ -34,25 +34,13 @@ jobs:
     
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
       
       - name: Create GitHub Release
         run: |
-          git config user.name "GitHub Actions"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          
           TAG_NAME=${GITHUB_REF#refs/tags/}
 
-          # Generate release notes from commit messages
-          RELEASE_NOTES=$(git log --pretty=format:"- %s (%h)" $(git describe --tags --abbrev=0 ^HEAD)..HEAD)
-          
-          gh release create $TAG_NAME \
+          gh release create "$TAG_NAME" \
             --title "$TAG_NAME" \
-            --notes "$RELEASE_NOTES"
+            --generate-notes
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
