@@ -1,5 +1,5 @@
 ---
-name: voice-blog
+name: type-blog
 description: 博客写作通用规范，所有博客类型的基础规则
 metadata:
   version: 2.0.0
@@ -10,7 +10,7 @@ metadata:
 
 ## 概述
 
-本文件定义所有博客类型共通的基础规则。具体类型（技术、艺术、个人随笔等）有各自的补充规范，请根据内容类型选择：
+本文件定义所有文本类型内容共通的基础规则。具体类型（技术、艺术、个人随笔等）有各自的补充规范，请根据内容类型选择：
 
 ```
 博客类型路由
@@ -18,8 +18,7 @@ metadata:
 ├── 艺术/摄影/音乐/电影 → domain-artistic
 ├── 设计 → domain-design
 ├── 文学/读书/写作 → domain-literary
-├── 个人随笔/生活分享/吐槽 → domain-personal
-└── 周刊/资讯 → voice-weekly
+└── 个人随笔/生活分享/吐槽 → domain-personal
 ```
 
 ---

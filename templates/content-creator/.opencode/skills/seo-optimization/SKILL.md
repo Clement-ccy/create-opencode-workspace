@@ -1,5 +1,5 @@
 ---
-name: skill-seo
+name: seo-optimization
 description: 博客/文章的 SEO 优化指南与流程，包含关键词策略、排版结构和技术要求。中英通用。
 metadata:
   version: 2.0.0

@@ -1,5 +1,5 @@
 ---
-name: voice-social
+name: type-social
 description: 社交媒体内容写作路由入口
 metadata:
   version: 2.0.0

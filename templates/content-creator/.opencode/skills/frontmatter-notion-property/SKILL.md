@@ -1,8 +1,9 @@
 ---
-name: skill-frontmatter-notion
+name: frontmatter-notion-property
 description: Markdown 文件的 Frontmatter 格式规范，用于与 Notion 数据库同步，所有生成的内容必须包含此头信息。
 metadata:
-  version: 1.0.0
+  version: 1.0.1
+  updated: 2026-03-29
 ---
 
 # Notion 同步 Frontmatter 规范

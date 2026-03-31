@@ -1,5 +1,5 @@
 ---
-name: platform-audio-podcast
+name: platform-audio
 description: 播客音频内容创作规范
 metadata:
   version: 1.0.0
