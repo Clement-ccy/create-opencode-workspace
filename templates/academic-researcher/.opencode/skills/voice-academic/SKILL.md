@@ -33,6 +33,7 @@ metadata:
 - **LaTeX**：`\cite{key}` / `\citep{key}` / `\citet{key}`
 
 ## 章节结构模板
+可以参考 `\references\*` 中的模板
 ### Abstract 模板
 ```text
 背景 → 问题 → 方法 → 结果 → 影响

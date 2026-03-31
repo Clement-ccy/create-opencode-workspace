@@ -1,0 +1,66 @@
+\section{Experiments}
+\label{sec:experiments}
+
+\subsection{Experimental Setup}
+
+We evaluate debiased one-pass attention sorting on the SynthWiki benchmark~\citep{Peysakhovich2023AttentionSC}, which contains synthetic long-context extractive QA instances with one gold document among many distractors. Following the original setup, we construct contexts of approximately 28K tokens by sampling distractor documents until the context limit, then shuffle document order so the gold document appears at a random position.
+
+We test two models with different position bias characteristics: LLaMA-2-7B-32K-Instruct~\citep{Touvron2023Llama2O}, an instruction-tuned model with moderate position bias, and YaRN-Llama-2-7b-64k~\citep{Peng2023YaRNEC}, a context-extended model without instruction tuning that exhibits severe recency bias. We compare four methods: (1) No Sorting (vanilla generation, 1 prefill pass), (2) Attention Sort $k=1$ (single-pass sorting by raw attention, 2 prefill passes), (3) Debiased $k=1$ (our proposed method, 2 prefill passes), and (4) Attention Sort $k=5$ (iterative sorting baseline, 6 prefill passes). We use greedy decoding and report exact-match accuracy across 200 examples per seed with 3 random seeds (42, 123, 456).
+
+\subsection{Main Results}
+
+\begin{table}[t]
+\centering
+\caption{Results on SynthWiki@28K with LLaMA-2-7B-32K-Instruct. Debiased $k=1$ produces identical results to uncalibrated $k=1$, indicating position-bias correction has zero effect on this model. Best in \textbf{bold}.}
+\label{tab:llama_results}
+\adjustbox{max width=\textwidth}{
+\begin{tabular}{lccccc}
+\toprule
+Method & Prefills & Seed 42 & Seed 123 & Seed 456 & Mean $\pm$ Std \\
+\midrule
+No Sorting & 1 & 70.5\% & 76.0\% & 72.0\% & 72.83\% $\pm$ 2.84\% \\
+Attn Sort $k=1$ & 2 & 94.0\% & \textbf{96.5\%} & 94.0\% & 94.83\% $\pm$ 1.44\% \\
+Debiased $k=1$ (Ours) & 2 & 94.0\% & \textbf{96.5\%} & 94.0\% & 94.83\% $\pm$ 1.44\% \\
+Attn Sort $k=5$ & 6 & \textbf{96.5\%} & 95.0\% & \textbf{95.0\%} & \textbf{95.50\%} $\pm$ 0.71\% \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
+
+\begin{table}[t]
+\centering
+\caption{Results on SynthWiki@28K with YaRN-Llama-2-7b-64k. Debiased $k=1$ improves +8.67pp over uncalibrated $k=1$ but remains 14.84pp behind $k=5$, closing only 37\% of the gap. Best in \textbf{bold}, second-best \underline{underlined}.}
+\label{tab:yarn_results}
+\adjustbox{max width=\textwidth}{
+\begin{tabular}{lccccc}
+\toprule
+Method & Prefills & Seed 42 & Seed 123 & Seed 456 & Mean $\pm$ Std \\
+\midrule
+No Sorting & 1 & 36.0\% & 33.5\% & 38.0\% & 35.83\% $\pm$ 2.25\% \\
+Attn Sort $k=1$ & 2 & 47.0\% & 45.0\% & 49.5\% & 47.17\% $\pm$ 2.25\% \\
+Debiased $k=1$ (Ours) & 2 & \underline{57.5\%} & \underline{53.5\%} & \underline{56.5\%} & \underline{55.83\%} $\pm$ 2.08\% \\
+Attn Sort $k=5$ & 6 & \textbf{71.5\%} & \textbf{73.5\%} & \textbf{67.0\%} & \textbf{70.67\%} $\pm$ 3.33\% \\
+\bottomrule
+\end{tabular}
+}
+\end{table}
+
+Table~\ref{tab:llama_results} presents results on LLaMA-2-7B-32K-Instruct. Strikingly, debiased $k=1$ produces byte-identical results to uncalibrated $k=1$ across all 600 examples (0 wins, 600 ties, 0 losses in paired comparison). This indicates that position-bias correction has zero effect on this well-tuned model. The gap between $k=1$ (94.83\%) and $k=5$ (95.50\%) is only 0.67 percentage points, suggesting that position bias is not the primary bottleneck limiting single-pass sorting performance.
+
+Table~\ref{tab:yarn_results} shows results on YaRN-Llama-2-7b-64k, which exhibits severe recency bias. Here, debiased $k=1$ achieves 55.83\% accuracy, improving +8.67pp over uncalibrated $k=1$ (47.17\%). However, it remains 14.84pp behind $k=5$ (70.67\%), closing only 37\% of the gap. This demonstrates that while debiasing provides meaningful improvement on high-bias models, it is insufficient to match iterative sorting.
+
+The effectiveness of position-bias correction is highly model-dependent. On LLaMA-2-7B-32K-Instruct, uncalibrated $k=1$ already places the gold document at mean position 164.86 out of approximately 166 documents, leaving minimal room for bias correction to improve. On YaRN, the severe recency bias means raw attention scores are significantly corrupted by position, making debiasing beneficial but still insufficient.
+
+\subsection{Analysis: Iterative Sorting Progression}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.9\textwidth]{iterative_progression.png}
+\caption{Accuracy and mean gold document position across sorting iterations ($k=1$ to $k=5$) on LLaMA-2-7B-32K-Instruct. Most improvement occurs in the first two iterations, with accuracy increasing from 94.83\% ($k=1$) to 95.83\% ($k=2$), then plateauing. Gold document position converges to $\sim$165.77 out of $\sim$166 documents.}
+\label{fig:progression}
+\end{figure}
+
+Figure~\ref{fig:progression} shows the progression of accuracy and gold document position across sorting iterations on LLaMA-2-7B-32K-Instruct. Most improvement occurs in the first two iterations: accuracy increases from 94.83\% at $k=1$ to 95.83\% at $k=2$, then plateaus with minor fluctuations through $k=5$ (final accuracy 95.50\%). The gold document position converges rapidly, reaching 164.85 after $k=1$ and stabilizing at approximately 165.77 by $k=5$.
+
+These results suggest that iterative sorting provides benefits beyond position-bias correction. Even after the gold document is placed near the optimal position, additional iterations continue to improve accuracy slightly. This may be attributed to attention context refinement, where changing document adjacency alters cross-document attention patterns, and error accumulation reduction, where multiple passes average out attention noise. The 0.67pp residual gap between $k=1$ and $k=5$ on LLaMA, and the 14.84pp gap on YaRN after debiasing, indicate that these secondary effects contribute meaningfully to iterative sorting's effectiveness.
+

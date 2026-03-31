@@ -1,0 +1,4 @@
+\section{Conclusion}
+\label{sec:conclusion}
+
+We proposed debiased one-pass attention sorting, which estimates and subtracts position bias from raw attention scores to enable single-pass document reordering. Our experiments reveal that position-bias correction is insufficient to match iterative sorting: on LLaMA-2-7B-32K-Instruct, debiasing has zero effect, while on YaRN-Llama-2-7b-64k, it improves accuracy by 8.67pp but remains 14.84pp behind $k=5$ sorting. These results suggest that iterative sorting provides benefits beyond bias correction, likely from attention context refinement and error reduction across passes. Our findings indicate that debiasing should be applied selectively to high-bias models, and that future work should investigate the mechanisms underlying iterative sorting's effectiveness. Limitations include evaluation on only two models and one benchmark; broader evaluation across diverse models and tasks would strengthen these conclusions.

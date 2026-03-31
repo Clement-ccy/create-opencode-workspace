@@ -1,0 +1,30 @@
+\section{Method}
+\label{sec:method}
+
+\subsection{Problem Setup}
+
+We consider long-context extractive question answering, where a model receives a query $q$ and $N$ documents $\mathcal{D} = \{d_1, \ldots, d_N\}$ concatenated into a single prompt, with exactly one document containing the answer. Due to position bias~\citep{Liu2023LostIT}, LLMs tend to over-attend to documents near the beginning or end of the context while under-utilizing middle positions. For models exhibiting recency bias, placing the relevant document at the end of the context improves answer accuracy. The goal is to reorder documents so that the relevant document appears in a high-attention position (typically the end) before generating the answer.
+
+\subsection{Attention Sorting Baseline}
+
+Attention Sorting~\citep{Peysakhovich2023AttentionSC} addresses position bias through iterative document reordering based on attention patterns. For each document $d_i$ occupying token span $S_i$, the method computes a raw attention mass $a_i$ by aggregating attention weights from the first generated token across all layers $\ell$ and heads $h$:
+\begin{equation}
+a_i = \sum_{\ell=1}^{L} \sum_{h=1}^{H} \sum_{t \in S_i} A^{\ell,h}_{t},
+\end{equation}
+where $A^{\ell,h}_{t}$ is the attention weight from the first output token to input token $t$ at layer $\ell$ and head $h$. Documents are then sorted by ascending $a_i$, placing high-attention documents at the end. This process repeats for $k$ iterations before generating the final answer. With $k$ sorting iterations, the method requires $k+1$ prefill passes: $k$ passes for attention extraction and sorting, plus one final pass for answer generation. For $k=5$, this results in 6 prefill passes per query, significantly increasing latency for long contexts.
+
+\subsection{Debiased One-Pass Sorting}
+
+We hypothesize that iterative sorting is primarily needed because raw attention scores $a_i$ are confounded by position bias: a relevant document far from the end may not receive sufficient attention in a single pass to be placed optimally. If we can explicitly estimate and remove this position-dependent bias, a single sorting pass should suffice.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{framework_overview.png}
+\caption{Overview of standard iterative Attention Sorting ($k=5$, 6 prefill passes) versus the proposed Debiased One-Pass approach ($k=1$, 2 prefill passes). The proposed method estimates a position-bias curve from distractor documents and subtracts it from raw attention scores to produce debiased relevance rankings.}
+\label{fig:framework}
+\end{figure}
+
+Our proposed method, illustrated in Figure~\ref{fig:framework}, operates as follows. First, we extract raw attention masses $a_i$ for each document using a single decode step, identical to the first iteration of standard Attention Sorting. Second, we estimate a position-bias curve $\hat{b}(p)$ from the attention-position pairs $(p_i, a_i)$ within the same prompt, where $p_i$ denotes document $i$'s position index. Under the assumption that most documents are distractors with near-zero relevance, we trim the top $\alpha$ fraction of documents by attention (default $\alpha=0.05$) to exclude likely relevant documents, bin the remaining positions into $B$ equal-width bins (default $B=20$), compute the median attention within each bin, and interpolate to obtain a continuous bias curve $\hat{b}(p)$. Third, we compute debiased scores $s_i = a_i - \hat{b}(p_i)$ (additive debiasing) or $s_i = a_i / \hat{b}(p_i)$ (divisive debiasing). Finally, we reorder documents by $s_i$ and generate the answer from the reordered prompt.
+
+This approach requires only 2 prefill passes (one for attention extraction, one for answer generation), matching $k=1$ Attention Sorting while aiming to achieve $k=5$ accuracy through explicit bias correction rather than iterative refinement.
+
